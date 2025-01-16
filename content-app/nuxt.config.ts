@@ -7,9 +7,6 @@ export default defineNuxtConfig({
     },
 
     compatibilityDate: '2025-01-14',
-    app: {
-        baseURL: '/sagemaker-huggingface', // Replace with your repo name
-    },
     nitro: {
         prerender: {
             failOnError: false, // Don't fail the build if some routes fail to prerender
