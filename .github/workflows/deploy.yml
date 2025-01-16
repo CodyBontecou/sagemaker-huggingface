@@ -1,6 +1,9 @@
 name: Deploy to GitHub Pages
 on:
-  push:
+  workflow_run:
+    workflows: ["Generate Content"]
+    types:
+      - completed
     branches: [ main ]
   workflow_dispatch:
 
