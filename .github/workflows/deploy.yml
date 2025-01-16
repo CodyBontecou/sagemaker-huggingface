@@ -11,6 +11,10 @@ permissions:
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: content-app
+
     steps:
       - uses: actions/checkout@v4
       - name: Setup and Build

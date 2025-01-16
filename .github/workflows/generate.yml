@@ -10,6 +10,10 @@ permissions:
 jobs:
   generate:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: content-app
+
     steps:
       - uses: actions/checkout@v4
       - name: Setup Node.js
