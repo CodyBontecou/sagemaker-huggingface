@@ -39,7 +39,7 @@ jobs:
         env:
           AWS_ENDPOINT_NAME: ${{ secrets.AWS_ENDPOINT_NAME }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
-        run: npm run build
+        run: npm run generate
 
       - name: Commit translated files
         run: |
