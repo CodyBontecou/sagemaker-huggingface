@@ -7,9 +7,4 @@ export default defineNuxtConfig({
     },
 
     compatibilityDate: '2025-01-14',
-    nitro: {
-        prerender: {
-            failOnError: false, // Don't fail the build if some routes fail to prerender
-        },
-    },
 })
