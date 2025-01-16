@@ -1,1 +1,0 @@
-# Hola mundo. # Hola mundo, ¿cómo estás?
