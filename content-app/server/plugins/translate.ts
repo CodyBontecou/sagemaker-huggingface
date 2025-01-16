@@ -18,6 +18,8 @@ export default defineNitroPlugin(async nitroApp => {
                 lang.tgt
             )
 
-        handleFileCreation(file, response[0].translation_text, lang.tgt)
+        if (!file._id.includes('content:spa:')) {
+            handleFileCreation(file, response[0].translation_text, lang.tgt)
+        }
     })
 })
