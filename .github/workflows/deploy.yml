@@ -1,0 +1,23 @@
+name: Build and Deploy
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  pages: write
+  id-token: write
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup and Build
+        run: |
+          npm ci
+          npm run build
+      - name: Upload and Deploy
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.output/public'
