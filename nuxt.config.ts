@@ -7,8 +7,4 @@ export default defineNuxtConfig({
     },
 
     compatibilityDate: '2025-01-14',
-    nitro: {
-        preset: 'vercel',
-        static: true,
-    },
 })
