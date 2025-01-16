@@ -42,9 +42,7 @@ jobs:
         env:
           AWS_ENDPOINT_NAME: ${{ secrets.AWS_ENDPOINT_NAME }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
-        run: |
-          mkdir -p content
-          npm run generate
+        run: npm run generate
 
       - name: Commit translated files
         run: |
@@ -59,10 +57,14 @@ jobs:
         run: npm install --global vercel@latest
 
       - name: Pull Vercel Environment Information
+        env:
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
 
-      - name: Build Project Artifacts
-        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
-
       - name: Deploy to Vercel
-        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+        run: |
+          vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }}
