@@ -1,0 +1,9 @@
+[project]
+name = "sagemaker-huggingface"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.7"
+dependencies = [
+    "sagemaker>=2.183.0",
+]
