@@ -13,13 +13,10 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: content-app
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Fetch all history to ensure we have the latest commits
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -36,9 +33,11 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Install dependencies
+        working-directory: content-app
         run: npm ci
 
       - name: Generate content
+        working-directory: content-app
         env:
           AWS_ENDPOINT_NAME: ${{ secrets.AWS_ENDPOINT_NAME }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
@@ -46,19 +45,7 @@ jobs:
           mkdir -p content
           npm run generate
 
-      - name: Commit translated files
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add .
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Add translated content [skip ci]" && git push)
-        working-directory: ${{ github.workspace }}
-
-      - name: Checkout latest commit
-        run: |
-          git pull origin main
-        working-directory: ${{ github.workspace }}
-
+      # Instead of committing, we'll deploy directly with the generated files
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v25
         with:
@@ -67,3 +54,11 @@ jobs:
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           working-directory: content-app
           vercel-args: '--prod'
+
+      # Commit the generated files after deployment
+      - name: Commit generated files
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add .
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Add generated content [skip ci]" && git push)
