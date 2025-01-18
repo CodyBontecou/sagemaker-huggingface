@@ -2,6 +2,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "prebuild": "tsx scripts/translate-content.ts",
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
@@ -12,5 +13,9 @@
     "@nuxt/content": "^2.13.4",
     "@nuxtjs/i18n": "^8.5.5",
     "nuxt": "^3.13.2"
+  },
+  "devDependencies": {
+    "dotenv": "^16.4.7",
+    "tsx": "^4.19.2"
   }
 }
