@@ -63,4 +63,4 @@ jobs:
 
       - name: Deploy to Vercel
         run: |
-            vercel deploy .output/public --prod --token=${{ secrets.VERCEL_TOKEN }} --yes
+            vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }} --yes
