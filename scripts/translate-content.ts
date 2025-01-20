@@ -1,6 +1,6 @@
 import { readdir, readFile, writeFile, mkdir } from 'fs/promises'
 import { join, dirname } from 'path'
-import { invokeSageMakerEndpoint } from '../server/utils/invokeSageMakerEndpoint'
+import { invokeSageMakerEndpoint } from './invokeSageMakerEndpoint'
 import { config } from 'dotenv'
 
 // Load environment variables
