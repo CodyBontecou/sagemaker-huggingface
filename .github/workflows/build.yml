@@ -54,13 +54,3 @@ jobs:
           git diff --quiet && git diff --staged --quiet || (git commit -m "Add translated content [skip ci]" && git push)
           git push
         working-directory: ${{ github.workspace }}
-
-      - name: Install Vercel CLI
-        run: npm install --global vercel@latest
-
-      - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-
-      - name: Deploy to Vercel
-        run: |
-            vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }} --yes
